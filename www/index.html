@@ -33,10 +33,10 @@
         })
     }
 
-    function searchLevel(){
-        let level = parseInt($("#level").val());
+    function searchRarity(){
+        let rarity = parseInt($("#rarity").val());
         let TestDataClass = ncmb.DataStore(db);
-        TestDataClass.equalTo("level", level)
+        TestDataClass.equalTo("rarity", rarity)
         .fetchAll()
         .then(function(results) {
             showResults(results);
@@ -50,9 +50,9 @@
         // 各データを収めた表の列を生成
         msg += "<tr>";
         msg += "<td>" + results[i].name + "</td>";
-        msg += "<td class='num'>" + results[i].level + "</td>";
-        msg += "<td class='num'>" + results[i].attack + "</td>";
-        msg += "<td class='num'>" + results[i].defence + "</td>";
+        msg += "<td class='num'>" + results[i].rarity + "</td>";
+        msg += "<td class='num'>" + results[i].attribute + "</td>";
+        msg += "<td class='num'>" + results[i].weapon + "</td>";
         msg += "</tr>";
       }
       // テーブルのテイラを生成
@@ -66,18 +66,18 @@
   <h1>mBaaS search</h1>
   <div>
     <label for="name">name:</label>
-    <input id="name" type="text" placeholder="monster name">
+    <input id="name" type="text" placeholder="character name">
   </div>
   <div>
-    <label for="level">level:</label>
-    <input id="level" type="number" placeholder="monster level">
+    <label for="rarity">rarity:</label>
+    <input id="rarity" type="number" placeholder="character  rarity">
   </div>
   <div id="button">
     <button class="btn" onclick="fetchAll()">Fetch All</button>
     <button class="btn" onclick="searchName()">Name</button>
     <br>
     <button class="btn" onclick="searchLevelLT()">Level &lt</button>
-    <button class="btn" onclick="searchLevel()">Level</button>
+    <button class="btn" onclick="searchRarity()">Rarity</button>
      <button class="btn" onclick="searchLevelGT()">Level &gt</button>
     
   </div>
