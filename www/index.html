@@ -43,6 +43,17 @@
         })
     }
 
+     function searchAttribute(){
+        let attribute = $("#attribute").val();
+        let TestDataClass = ncmb.DataStore(db);
+        TestDataClass.equalTo("attribute", attribute)
+        .fetchAll()
+        .then(function(results) {
+            showResults(results);
+        })
+    }
+
+
     function showResults(results) {
       // テーブルのヘッダを生成
       let msg = "<table><tr><th>name</th><th>Lvl</th><th>attack</th><th>defence</th></tr>";
@@ -72,6 +83,10 @@
     <label for="rarity">rarity:</label>
     <input id="rarity" type="number" placeholder="character  rarity">
   </div>
+  <div>
+    <label for="attribute">attribute:</label>
+    <input id="attribute" type="text" placeholder="character attribute">
+  </div>
   <div id="button">
     <button class="btn" onclick="fetchAll()">Fetch All</button>
     <button class="btn" onclick="searchName()">Name</button>
@@ -79,6 +94,7 @@
     <button class="btn" onclick="searchLevelLT()">Level &lt</button>
     <button class="btn" onclick="searchRarity()">Rarity</button>
      <button class="btn" onclick="searchLevelGT()">Level &gt</button>
+      <button class="btn" onclick="searchAttribute()">attribute</button>
     
   </div>
   <div id="message">message area</div>
