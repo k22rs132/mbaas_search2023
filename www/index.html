@@ -53,10 +53,51 @@
         })
     }
 
+      function searchWeapon(){
+        let weapon = $("#weapon").val();
+        let TestDataClass = ncmb.DataStore(db);
+        TestDataClass.equalTo("weapon", weapon)
+        .fetchAll()
+        .then(function(results) {
+            showResults(results);
+        })
+    }
+
+     function searchFrom(){
+        let from = $("#from").val();
+        let TestDataClass = ncmb.DataStore(db);
+        TestDataClass.equalTo("from", from)
+        .fetchAll()
+        .then(function(results) {
+            showResults(results);
+        })
+    }
+
+    function searchRarityLT(){
+        let rarity = parseInt($("#rarity").val());
+        let TestDataClass = ncmb.DataStore(db);
+        TestDataClass
+        .lessThan("rarity", rarity)
+        .fetchAll()
+        .then(function(results){
+            showResults(results);
+        })
+    }
+
+    function searchRarityGT(){
+        let rarity = parseInt($("#rarity").val(), 10)
+        let TestDataClass = ncmb.DataStore(db);
+        TestDataClass
+        .greaterThan("rarity", rarity)
+        .fetchAll()
+        .then(function(results){
+            showResults(results);
+        })
+    }
 
     function showResults(results) {
       // テーブルのヘッダを生成
-      let msg = "<table><tr><th>name</th><th>Lvl</th><th>attack</th><th>defence</th></tr>";
+      let msg = "<table><tr><th>name</th><th>rarity</th><th>attribute</th><th>weapon</th><th>from</th></tr>";
       for (let i = 0; i < results.length; i++) {
         // 各データを収めた表の列を生成
         msg += "<tr>";
@@ -64,6 +105,7 @@
         msg += "<td class='num'>" + results[i].rarity + "</td>";
         msg += "<td class='num'>" + results[i].attribute + "</td>";
         msg += "<td class='num'>" + results[i].weapon + "</td>";
+         msg += "<td class='num'>" + results[i].from + "</td>";
         msg += "</tr>";
       }
       // テーブルのテイラを生成
@@ -87,14 +129,24 @@
     <label for="attribute">attribute:</label>
     <input id="attribute" type="text" placeholder="character attribute">
   </div>
+   <div>
+    <label for="weapon">weapon:</label>
+    <input id="weapon" type="text" placeholder="character weapon">
+  </div>
+   <div>
+    <label for="from">from:</label>
+    <input id="from" type="text" placeholder="character from">
+  </div>
   <div id="button">
     <button class="btn" onclick="fetchAll()">Fetch All</button>
     <button class="btn" onclick="searchName()">Name</button>
     <br>
-    <button class="btn" onclick="searchLevelLT()">Level &lt</button>
+    <button class="btn" onclick="searchRarityLT()">Rarity &lt</button>
     <button class="btn" onclick="searchRarity()">Rarity</button>
-     <button class="btn" onclick="searchLevelGT()">Level &gt</button>
-      <button class="btn" onclick="searchAttribute()">attribute</button>
+    <button class="btn" onclick="searchRarityGT()">Rarity &gt</button>
+    <button class="btn" onclick="searchAttribute()">attribute</button>
+    <button class="btn" onclick="searchWeapon()">weapon</button>
+    <button class="btn" onclick="searchFrom()">from</button>
     
   </div>
   <div id="message">message area</div>
